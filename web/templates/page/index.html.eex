@@ -1,0 +1,13 @@
+<div class="row marketing">
+  <div class="col-sm-4">
+    <ul id="tree" class="nav nav-pills nav-stacked">
+    </ul>
+  </div>
+  <div class="col-sm-8">
+    <div class="panel panel-default">
+      <textarea id="file" class="form-control panel-body" readonly>
+        Select file to watch...
+      </textarea>
+    </div>
+  </div>
+</div>

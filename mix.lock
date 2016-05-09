@@ -1,0 +1,11 @@
+%{"cowboy": {:hex, :cowboy, "1.0.4"},
+  "cowlib": {:hex, :cowlib, "1.0.2"},
+  "fs": {:git, "https://github.com/synrc/fs.git", "d3eaca4a2686caaad5dfd4dc36890d3b755185f7", []},
+  "gettext": {:hex, :gettext, "0.11.0"},
+  "phoenix": {:hex, :phoenix, "1.2.0-rc.0"},
+  "phoenix_html": {:hex, :phoenix_html, "2.5.1"},
+  "phoenix_live_reload": {:hex, :phoenix_live_reload, "1.0.5"},
+  "phoenix_pubsub": {:hex, :phoenix_pubsub, "1.0.0-rc.0"},
+  "plug": {:hex, :plug, "1.1.4"},
+  "poison": {:hex, :poison, "2.1.0"},
+  "ranch": {:hex, :ranch, "1.2.1"}}
