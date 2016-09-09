@@ -1,10 +1,15 @@
 import "phoenix_html"
 import {Socket} from "phoenix"
 
-let socket = new Socket("/socket")
+let socket = new Socket("/socket", {
+  logger: (kind, msg, data) => {
+    console.log(`${kind}: ${msg}`, data)
+  }
+})
 socket.connect()
 
 let fileChannel = socket.channel("file_watch")
+window.file = fileChannel
 
 let treeContainer = document.getElementById("tree")
 let fileContainer = document.getElementById("file")
@@ -47,3 +52,11 @@ fileChannel.on("update_tree", updateTree)
 fileChannel.on("update_file", updateFile)
 
 fileChannel.join().receive("ok", updateTree)
+
+let resizeFilePane = () => {
+  let height = Math.floor(document.documentElement.clientHeight * 0.94)
+  fileContainer.style.height = `${height}px`
+}
+
+resizeFilePane()
+window.onresize = resizeFilePane

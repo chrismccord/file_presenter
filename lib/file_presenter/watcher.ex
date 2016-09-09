@@ -6,7 +6,10 @@ defmodule FilePresenter.Watcher do
     ~r{web/.*(ex)$},
     ~r{web/static/.*$},
     ~r{web/templates/.*(eex)$},
-    ~r{lib/.*(ex)$}
+    ~r{lib/.*(ex|exs)$},
+    ~r{mix\.exs$},
+    ~r{brunch-config.js$},
+    ~r{config/.*(exs)$}
    ]
 
   def get_tree() do
@@ -28,12 +31,25 @@ defmodule FilePresenter.Watcher do
   end
 
   def handle_call({:get_file, rel_path}, _form, %{watch_path: watch_path} = state) do
-    full_path = Path.join(watch_path, rel_path)
+    safe_rel_path =
+      rel_path
+      |> String.replace("../", "")
+      |> String.replace("./", "")
+      |> String.replace("\\", "")
+      |> String.replace(":/", "")
+
+    full_path = Path.join(watch_path, safe_rel_path)
     {:reply, {:ok, safe_read(full_path)}, state}
   end
 
   def handle_call(:tree, _form, state) do
     {:reply, {:ok, get_relative_tree(state)}, state}
+  end
+
+  def handle_info(:update_tree, state) do
+    relative_tree = get_relative_tree(state)
+    FilePresenter.Endpoint.broadcast("file_watch", "update_tree", %{tree: relative_tree})
+    {:noreply, state}
   end
 
   def handle_info({_pid, {:fs, :file_event}, {path, _event}}, state) do
@@ -42,8 +58,7 @@ defmodule FilePresenter.Watcher do
       relative_path = Path.relative_to(path, state.watch_path)
       IO.inspect "Update: #{relative_path}"
       tree = get_tree(state.watch_path)
-      relative_tree = get_relative_tree(state)
-      FilePresenter.Endpoint.broadcast("file_watch", "update_tree", %{tree: relative_tree})
+      Process.send_after(self(), :update_tree, 100)
       FilePresenter.Endpoint.broadcast("file_watch", "update_file", %{
         content: safe_read(path),
         path: to_string(relative_path)
@@ -70,7 +85,11 @@ defmodule FilePresenter.Watcher do
     patterns = [
       "priv/repo/**/*",
       "web/**/*",
-      "lib/**/*"
+      "lib/**/*",
+      "config/**/*",
+      "./mix.exs",
+      "./brunch-config.exs",
+      "test/**"
     ]
     Enum.flat_map(patterns, fn pattern ->
       Path.wildcard(Path.expand(Path.join(watch_path, pattern)), match_dot: false)
