@@ -30,7 +30,7 @@ defmodule FilePresenter.Mixfile do
   defp deps do
     [{:phoenix, "~> 1.2"},
      {:phoenix_pubsub, "~> 1.0.0-rc"},
-     {:phoenix_html, "~> 2.5"},
+     {:phoenix_html, "~> 2.6.2"},
      {:gettext, "~> 0.11"},
      {:fs, github: "synrc/fs"},
      {:cowboy, "~> 1.0"}]
