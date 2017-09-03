@@ -11,7 +11,7 @@ defmodule FilePresenter do
     # Define workers and child supervisors to be supervised
     children = [
       # Start the endpoint when the application starts
-      supervisor(FilePresenter.Endpoint, []),
+      supervisor(FilePresenterWeb.Endpoint, []),
       worker(FilePresenter.Watcher, [:watcher, watch_path])
       # Start your own worker by calling: FilePresenter.Worker.start_link(arg1, arg2, arg3)
       # worker(FilePresenter.Worker, [arg1, arg2, arg3]),
@@ -26,7 +26,7 @@ defmodule FilePresenter do
   # Tell Phoenix to update the endpoint configuration
   # whenever the application is updated.
   def config_change(changed, _new, removed) do
-    FilePresenter.Endpoint.config_change(changed, removed)
+    FilePresenterWeb.Endpoint.config_change(changed, removed)
     :ok
   end
 end

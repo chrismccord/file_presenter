@@ -6,11 +6,11 @@
 use Mix.Config
 
 # Configures the endpoint
-config :file_presenter, FilePresenter.Endpoint,
+config :file_presenter, FilePresenterWeb.Endpoint,
   url: [host: "localhost"],
   root: Path.dirname(__DIR__),
   secret_key_base: "HnP0mxYzMjTzxkrptVQtjilv4Za3BKP/XmzzlqajAVUx7O8oBY4NrR37oRi8uj7K",
-  render_errors: [view: FilePresenter.ErrorView, accepts: ~w(html json)],
+  render_errors: [view: FilePresenterWeb.ErrorView, accepts: ~w(html json)],
   pubsub: [name: FilePresenter.PubSub,
            adapter: Phoenix.PubSub.PG2]
 

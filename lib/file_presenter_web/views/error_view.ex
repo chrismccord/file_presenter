@@ -1,5 +1,5 @@
-defmodule FilePresenter.ErrorView do
-  use FilePresenter.Web, :view
+defmodule FilePresenterWeb.ErrorView do
+  use FilePresenterWeb, :view
 
   def render("404.html", _assigns) do
     "Page not found"

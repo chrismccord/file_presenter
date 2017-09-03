@@ -1,10 +1,10 @@
-defmodule FilePresenter.FileChannel do
-  use FilePresenter.Web, :channel
+defmodule FilePresenterWeb.FileChannel do
+  use FilePresenterWeb, :channel
 
   alias FilePresenter.Watcher
 
   def join("file_watch", _, socket) do
-    :ok = :fs.subscribe(:watcher)
+    # :ok = :fs.subscribe(:watcher)
     {:ok, tree} = Watcher.get_tree()
     {:ok, %{tree: tree}, socket}
   end

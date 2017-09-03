@@ -1,12 +1,12 @@
-defmodule FilePresenter.Web do
+defmodule FilePresenterWeb do
   @moduledoc """
   A module that keeps using definitions for controllers,
   views and so on.
 
   This can be used in your application as:
 
-      use FilePresenter.Web, :controller
-      use FilePresenter.Web, :view
+      use FilePresenterWeb, :controller
+      use FilePresenterWeb, :view
 
   The definitions below will be executed for every view,
   controller, etc, so keep them short and clean, focused
@@ -26,14 +26,14 @@ defmodule FilePresenter.Web do
     quote do
       use Phoenix.Controller
 
-      import FilePresenter.Router.Helpers
-      import FilePresenter.Gettext
+      import FilePresenterWeb.Router.Helpers
+      import FilePresenterWeb.Gettext
     end
   end
 
   def view do
     quote do
-      use Phoenix.View, root: "web/templates"
+      use Phoenix.View, root: "lib/file_presenter_web/templates"
 
       # Import convenience functions from controllers
       import Phoenix.Controller, only: [get_csrf_token: 0, get_flash: 2, view_module: 1]
@@ -41,9 +41,9 @@ defmodule FilePresenter.Web do
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
 
-      import FilePresenter.Router.Helpers
-      import FilePresenter.ErrorHelpers
-      import FilePresenter.Gettext
+      import FilePresenterWeb.Router.Helpers
+      import FilePresenterWeb.ErrorHelpers
+      import FilePresenterWeb.Gettext
     end
   end
 
@@ -56,7 +56,7 @@ defmodule FilePresenter.Web do
   def channel do
     quote do
       use Phoenix.Channel
-      import FilePresenter.Gettext
+      import FilePresenterWeb.Gettext
     end
   end
 

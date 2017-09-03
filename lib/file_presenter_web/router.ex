@@ -1,5 +1,5 @@
-defmodule FilePresenter.Router do
-  use FilePresenter.Web, :router
+defmodule FilePresenterWeb.Router do
+  use FilePresenterWeb, :router
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -13,14 +13,14 @@ defmodule FilePresenter.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", FilePresenter do
+  scope "/", FilePresenterWeb do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", FilePresenter do
+  # scope "/api", FilePresenterWeb do
   #   pipe_through :api
   # end
 end

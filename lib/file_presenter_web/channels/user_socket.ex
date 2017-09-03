@@ -1,8 +1,8 @@
-defmodule FilePresenter.UserSocket do
+defmodule FilePresenterWeb.UserSocket do
   use Phoenix.Socket
 
   ## Channels
-  channel "file_watch", FilePresenter.FileChannel
+  channel "file_watch", FilePresenterWeb.FileChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket

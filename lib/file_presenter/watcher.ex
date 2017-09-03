@@ -49,18 +49,19 @@ defmodule FilePresenter.Watcher do
 
   def handle_info(:update_tree, state) do
     relative_tree = get_relative_tree(state)
-    FilePresenter.Endpoint.broadcast("file_watch", "update_tree", %{tree: relative_tree})
+    FilePresenterWeb.Endpoint.broadcast("file_watch", "update_tree", %{tree: relative_tree})
     {:noreply, state}
   end
 
   def handle_info({_pid, {:fs, :file_event}, {path, _event}}, state) do
     if matches_any_pattern?(path, @patterns) do
-      asset_type = Path.extname(path) |> String.lstrip(?.)
+      asset_type = path |> Path.extname() |> String.trim_leading(".")
       relative_path = Path.relative_to(path, state.watch_path)
       IO.inspect "Update: #{relative_path}"
       tree = get_tree(state.watch_path)
       Process.send_after(self(), :update_tree, 100)
-      FilePresenter.Endpoint.broadcast("file_watch", "update_file", %{
+      FilePresenterWeb.Endpoint.broadcast("file_watch", "update_file", %{
+        type: asset_type,
         content: safe_read(path),
         path: to_string(relative_path)
       })

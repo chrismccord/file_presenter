@@ -1,7 +1,7 @@
-defmodule FilePresenter.Endpoint do
+defmodule FilePresenterWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :file_presenter
 
-  socket "/socket", FilePresenter.UserSocket
+  socket "/socket", FilePresenterWeb.UserSocket
 
   # Serve at "/" the static files from "priv/static" directory.
   #
@@ -36,5 +36,5 @@ defmodule FilePresenter.Endpoint do
     key: "_file_presenter_key",
     signing_salt: "zFCKU9iz"
 
-  plug FilePresenter.Router
+  plug FilePresenterWeb.Router
 end

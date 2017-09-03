@@ -1,4 +1,4 @@
-defmodule FilePresenter.ErrorHelpers do
+defmodule FilePresenterWeb.ErrorHelpers do
   @moduledoc """
   Conveniences for translating and building error messages.
   """
@@ -32,9 +32,9 @@ defmodule FilePresenter.ErrorHelpers do
     #     dgettext "errors", "is invalid"
     #
     if count = opts[:count] do
-      Gettext.dngettext(FilePresenter.Gettext, "errors", msg, msg, count, opts)
+      Gettext.dngettext(FilePresenterWeb.Gettext, "errors", msg, msg, count, opts)
     else
-      Gettext.dgettext(FilePresenter.Gettext, "errors", msg, opts)
+      Gettext.dgettext(FilePresenterWeb.Gettext, "errors", msg, opts)
     end
   end
 end

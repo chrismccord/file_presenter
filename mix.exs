@@ -6,10 +6,10 @@ defmodule FilePresenter.Mixfile do
      version: "0.0.1",
      elixir: "~> 1.2",
      elixirc_paths: elixirc_paths(Mix.env),
-     compilers: [:phoenix, :gettext] ++ Mix.compilers,
+     compilers: [:phoenix, :gettext] ++ Mix.compilers(),
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
-     deps: deps]
+     deps: deps()]
   end
 
   # Configuration for the OTP application.
@@ -28,8 +28,8 @@ defmodule FilePresenter.Mixfile do
   #
   # Type `mix help deps` for examples and options.
   defp deps do
-    [{:phoenix, "~> 1.2"},
-     {:phoenix_pubsub, "~> 1.0.0-rc"},
+    [{:phoenix, "~> 1.3"},
+     {:phoenix_pubsub, "~> 1.0"},
      {:phoenix_html, "~> 2.6.2"},
      {:gettext, "~> 0.11"},
      {:fs, "2.12.0"},
