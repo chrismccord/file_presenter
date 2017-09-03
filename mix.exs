@@ -32,7 +32,7 @@ defmodule FilePresenter.Mixfile do
      {:phoenix_pubsub, "~> 1.0.0-rc"},
      {:phoenix_html, "~> 2.6.2"},
      {:gettext, "~> 0.11"},
-     {:fs, github: "synrc/fs"},
+     {:fs, "2.12.0"},
      {:cowboy, "~> 1.0"}]
   end
 end

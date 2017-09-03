@@ -4,6 +4,7 @@ defmodule FilePresenter.Watcher do
   @patterns [
     ~r{priv/repo/.*(exs)$},
     ~r{web/.*(ex)$},
+    ~r{assets/.*$},
     ~r{web/static/.*$},
     ~r{web/templates/.*(eex)$},
     ~r{lib/.*(ex|exs)$},
@@ -84,6 +85,8 @@ defmodule FilePresenter.Watcher do
   defp get_tree(watch_path) do
     patterns = [
       "priv/repo/**/*",
+      "assets/js/**/*",
+      "assets/css/**/*",
       "web/**/*",
       "lib/**/*",
       "config/**/*",
