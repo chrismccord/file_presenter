@@ -1,6 +1,15 @@
 /* This file is for your main application css. */
 
-@import url('../node_modules/highlight.js/styles/arta.css');
+@import url('../node_modules/highlight.js/styles/agate.css');
+
+.main {
+  padding: 0 20px;
+  .path-name {
+    padding: 10px;
+    color: gray;
+    display: block;
+  }
+}
 
 .sidebar {
   position: fixed;

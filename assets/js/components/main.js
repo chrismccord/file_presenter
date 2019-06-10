@@ -9,9 +9,10 @@ const Main = ({file}) => {
   const lang = map.languages(ext);
   return (
     <div className="main">
-    <Highlight className={`language-${lang}`}>
-      {content}
-    </Highlight>
+      <span className="path-name">{path}</span>
+      <Highlight className={`language-${lang}`}>
+        {content}
+      </Highlight>
     </div>
   )
 }
