@@ -1,17 +1,16 @@
 defmodule FilePresenter.Watcher do
   use GenServer
 
-  @patterns [
-    ~r{priv/repo/.*(exs)$},
-    ~r{web/.*(ex)$},
-    ~r{assets/.*$},
-    ~r{web/static/.*$},
-    ~r{web/templates/.*(eex)$},
-    ~r{lib/.*(ex|exs)$},
-    ~r{mix\.exs$},
-    ~r{brunch-config.js$},
-    ~r{config/.*(exs)$}
-   ]
+   @patterns [
+     ~r{components/.*$},
+     ~r{assets/.*$},
+     ~r{lib/.*$},
+     ~r{.babelrc$},
+     ~r{index.html$},
+     ~r{package.json$},
+     ~r{README.md$},
+     ~r{webpack.config.js$}
+    ]
 
   def get_tree() do
     GenServer.call(__MODULE__, :tree)
@@ -85,15 +84,13 @@ defmodule FilePresenter.Watcher do
 
   defp get_tree(watch_path) do
     patterns = [
-      "priv/repo/**/*",
+      "components/**/*",
+      "lib/**/*",
       "assets/js/**/*",
       "assets/css/**/*",
-      "web/**/*",
-      "lib/**/*",
-      "config/**/*",
-      "./mix.exs",
-      "./brunch-config.exs",
-      "test/**"
+      ".babelrc",
+      "webpack.config.js",
+      "README.md"
     ]
     Enum.flat_map(patterns, fn pattern ->
       Path.wildcard(Path.expand(Path.join(watch_path, pattern)), match_dot: false)
