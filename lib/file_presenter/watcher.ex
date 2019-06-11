@@ -52,7 +52,7 @@ defmodule FilePresenter.Watcher do
     {:noreply, state}
   end
 
-  def handle_info({_pid, {:fs, :file_event}, {path, _event}}, state) do
+  def handle_info({_pid, {:fs, :file_event}, {path, event}}, state) do
     if matches_any_pattern?(path, @patterns) do
       asset_type = path |> Path.extname() |> String.trim_leading(".")
       relative_path = Path.relative_to(path, state.watch_path)
@@ -75,6 +75,7 @@ defmodule FilePresenter.Watcher do
     |> Stream.filter(fn path -> not File.dir?(path) end)
     |> Enum.map(&Path.relative_to(&1, watch_path))
   end
+
   defp safe_read(path) do
     case File.read(to_string(path)) do
       {:ok, content} -> content

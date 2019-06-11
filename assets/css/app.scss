@@ -1,9 +1,34 @@
 /* This file is for your main application css. */
+$border-color-gray: #cacaca;
+$border-color-blue: #c8ffff;
+$background-color-gray: #e7e7e7;
+$background-color-white: #f9f9f9;
+$side-bar-color: #BFF4FF;
+$link-color-hover: #003744;
+$link-color: #003744;
 
-@import url('../node_modules/highlight.js/styles/agate.css');
+.line {
+  display: inline-block;
+  width: 2em;
+  user-select: none;
+  opacity: 0.3;
+}
 
 .main {
   padding: 0 20px;
+  .top-wrapper {
+    display: flex;
+    align-items: center;
+    .lang-name {
+      font-size: 12px;
+      border-radius: 5px;
+      background-color: $background-color-gray;
+      padding: 2px 10px;
+      margin-left: auto;
+      border: 1px solid $border-color-gray;
+      text-shadow: 0.5px 1px 1px rgba(0, 0, 0, 0.2);
+    }
+  }
   .path-name {
     padding: 10px;
     color: gray;
@@ -15,10 +40,23 @@
   position: fixed;
   left: 0;
   top: 0;
-  background-color: #BFF4FF;
+  background-color: $side-bar-color;
   height: 100%;
   width: 20%;
   overflow-y: scroll;
+  .search-box {
+    padding: 5px;
+    position: fixed;
+    width: 20%;
+    background-color: $side-bar-color;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid $border-color-blue;
+    input {
+      width: 100%;
+      border: $border-color-gray;
+      padding: 5px 10px;
+    }
+  }
   ul {
     list-style: none;
     margin: 0;
@@ -28,11 +66,11 @@
     a {
       display: block;
       padding: 10px;
-      color: 003744;
+      color: $link-color;
       text-align: none;
       transition: all 0.1s ease-in;
       &:hover {
-        background-color: #003744;
+        background-color: $link-color-hover;
         color: white;
       }
     }
@@ -46,5 +84,5 @@
   overflow-y: auto;
   position: fixed;
   top: 0;
-  background-color: #f9f9f9;
+  background-color: $background-color-white;
 }
