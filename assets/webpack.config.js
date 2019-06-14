@@ -41,6 +41,16 @@ module.exports = (env, options) => ({
         ]
       },
       {
+        test: /\.(woff2?|svg|png)$/,
+        loader: 'url-loader',
+        query: {
+          limit: '10000'
+        }
+      }, {
+        test: /\.(ttf|eot)$/,
+        loader: 'file-loader'
+      },
+      {
         test: /\.css$/,
         use: [MiniCssExtractPlugin.loader, 'css-loader']
       }

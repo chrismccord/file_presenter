@@ -7,6 +7,8 @@ $side-bar-color: #BFF4FF;
 $link-color-hover: #003744;
 $link-color: #003744;
 
+// @import url("../node_modules/font-awesome/css/font-awesome.css");
+
 .line {
   display: inline-block;
   width: 2em;
@@ -51,12 +53,19 @@ $link-color: #003744;
     background-color: $side-bar-color;
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
     border-bottom: 1px solid $border-color-blue;
-    input {
+    .search-input {
       width: 100%;
       border: $border-color-gray;
       padding: 5px 10px;
+      background-image: url('/images/search.png');
+      background-size: 10px;
+      background-repeat: no-repeat;
+      background-position-y: 50%;
+      background-position-x: calc(100% - 10px);
+      padding-right: 25px;
     }
   }
+  
   ul {
     list-style: none;
     margin: 0;
