@@ -19,11 +19,14 @@ class Main extends Component {
   render() {
     const options = [
       { value: 'dracula', label: 'Dracula' },
-      { value: 'vsDark', label: 'VS Dark' },
       { value: 'nighOwl', label: 'Night Owl' },
       { value: 'duotoneDark', label: 'Duo Tone Dark'},
       { value: 'duotoneLight', label: 'Duo Tone Light'},
-      { value: 'oceanicNext', label: 'Oceanic Next'}
+      { value: 'oceanicNext', label: 'Oceanic Next'},
+      { value: 'shadesOfPurple', label: 'Shades of Purple'},
+      { value: 'ultramin', label: 'Ultramin'},
+      { value: 'vsDark', label: 'VS Dark' },
+      { value: 'vsDarkPlus', label: 'VS Dark Plus' }
     ];
     const { selectedTheme } = this.state;
     const { path, content } = this.props.file;
