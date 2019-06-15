@@ -21,6 +21,9 @@ class Main extends Component {
       { value: 'dracula', label: 'Dracula' },
       { value: 'vsDark', label: 'VS Dark' },
       { value: 'nighOwl', label: 'Night Owl' },
+      { value: 'duotoneDark', label: 'Duo Tone Dark'},
+      { value: 'duotoneLight', label: 'Duo Tone Light'},
+      { value: 'oceanicNext', label: 'Oceanic Next'}
     ];
     const { selectedTheme } = this.state;
     const { path, content } = this.props.file;
@@ -29,18 +32,18 @@ class Main extends Component {
     return (
       <div className="main">
         <div className="content-file">
+          <Select
+            value={selectedTheme}
+            onChange={(event) => {
+              this.setState({
+                selectedTheme: event
+              });
+            }}
+            placeholder='Select a theme'
+            options={options}
+          />
           <TopMainHeader path={path} lang={lang}/>
-            <Select
-              value={selectedTheme}
-              onChange={(event) => {
-                this.setState({
-                  selectedTheme: event
-                });
-              }}
-              placeholder='Select a theme'
-              options={options}
-            />
-        <PrismHighlight theme={selectedTheme} content={content || 'Select any file'} lang={lang}/>
+          <PrismHighlight theme={selectedTheme} content={content || 'Select any file'} lang={lang}/>
         </div>
       </div>
     )
