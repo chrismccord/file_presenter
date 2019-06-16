@@ -3,6 +3,7 @@ defmodule FilePresenterWeb.UserSocket do
 
   ## Channels
   channel "file_watch", FilePresenterWeb.FileChannel
+  channel "chat", FilePresenterWeb.ChatChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket

@@ -1,3 +1,4 @@
 export default {
-  CHANNELNAME: 'file_watch'
+  CHANNELNAME: 'file_watch',
+  CHATCHANNELNAME: 'chat'
 }
