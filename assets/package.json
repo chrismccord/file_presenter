@@ -6,6 +6,8 @@
     "watch": "webpack --mode development --watch"
   },
   "dependencies": {
+    "classes": "^0.3.0",
+    "classnames": "^2.2.6",
     "file-extension": "^4.0.5",
     "file-loader": "^4.0.0",
     "lang-map": "^0.4.0",

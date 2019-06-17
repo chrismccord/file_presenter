@@ -15,7 +15,8 @@ class Main extends Component {
         label: 'Default'
       },
     }
-  }
+  }  
+
   render() {
     const options = [
       { value: 'dracula', label: 'Dracula' },

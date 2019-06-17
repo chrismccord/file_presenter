@@ -58,25 +58,35 @@ body {
     font-size: 20px;
     color: $white;
     border-radius: 5px;
+    &.disabled {
+      background-color: #bee5eb;
+      color: #7aa7a5;
+      &:hover {
+        color: #7aa7a5;
+        background-color: #bee5eb;
+        cursor: auto;
+      }
+    }
     &:hover {
       background-color: rgba($strong-primary-color, 0.9)
     }
   }
   .wrapper {
-    width: 20%;
+    width: 25%;
     text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: stretch;
-    background-color: $primary-color;
-    padding: 50px 10px;
-    border: 1px solid $strong-primary-color;
+    background-color: #f7f7f7;
+    padding: 80px 40px;
+    border: 1px solid #d8d8d8;
     border-radius: 5px;
     box-shadow: 1px 1px 5px rgba($strong-primary-color, 0.2);
     .nice-input {
       font-size: 20px;
       text-align: center;
+      margin-bottom: 10px;
     }
   }
 }
@@ -130,6 +140,11 @@ body {
   padding: 5px;
   border-radius: 5px;
   border: 1px solid $border-color-gray;
+  .chat-instructions {
+    font-size: 12px;
+    color: $border-color-gray;
+    margin-top: 10px;
+  }
   &.is-chat-open-false {
     border: none;
     padding: 0;
@@ -138,8 +153,9 @@ body {
       width: 30px;
       height: 30px;
       top: -30px;
+      line-height: 40px;
     }
-    .chat-sizes, .nice-input, button {
+    .chat-sizes, .nice-input, button, .chat-instructions {
       display: none;
     }
   }
@@ -148,24 +164,25 @@ body {
   }
   #close-chat {
     position: absolute;
-    right: 0px;
-    top: -25px;
+    right: 5px;
+    top: 5px;
     text-decoration: none;
-    font-size: 15px;
+    font-size: 10px;
     font-weight: bold;
-    background-color: #dfdfdf;
+    background-color: #ededed;
     padding: 2px;
     border-radius: 3px;
     width: 20px;
     height: 20px;
+    line-height: 18px;
     text-align: center;
-    color: #6f4949;
+    color: #a9a9a9;
   }
   .chat-sizes {
     display: flex;
     margin-bottom: 5px;
     align-items: flex-end;
-    margin-left: auto;
+    margin-right: auto;
     .size-w {
       display: flex;
       height: 20px;

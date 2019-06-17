@@ -9,6 +9,7 @@ defmodule FilePresenter do
 
     children = [
       supervisor(FilePresenterWeb.Endpoint, []),
+      worker(FilePresenter.ChatMonitor, [:char_monitor, []]),
       worker(FilePresenter.Watcher, [:watcher, watch_path])
     ]
 

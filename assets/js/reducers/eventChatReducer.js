@@ -3,6 +3,10 @@ const eventChatReducer = (state, {event, payload}) => {
     case 'new_message':
       state.messages.push(payload.message)
       return {...state};
+    case 'phx_reply':
+      state.messages = payload.response.messages;
+      return {...state}
+      break;
     default:
       return state
   }

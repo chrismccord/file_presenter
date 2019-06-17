@@ -39,9 +39,9 @@ function Chat({user}) {
             }
           }
         }} value={text}></textarea>
-      {(size == 'medium' || size == 'large') &&
+      <span className="chat-instructions">```code```</span>
+      {(size != 'small') &&
         <button onClick={() => {
-            console.log(text);
             if (text) {
               broadcast('new_message', {username, text})
               setText('')
