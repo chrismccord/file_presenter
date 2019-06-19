@@ -10,7 +10,9 @@ function ChatContainer() {
   return (
     <div id='chat-container'>
       {state.messages && state.messages.reverse().map((message, index) => {
-        return <Message message={message} key={index}/>
+        return <Message onDelete={(message) => {
+            broadcast('delete_message', {id: message.id});
+          }} message={message} key={index}/>
       })}
     </div>
   )

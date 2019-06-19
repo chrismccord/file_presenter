@@ -15,9 +15,23 @@ class Main extends Component {
         label: 'Default'
       },
     }
-  }  
+  }
+
+  renderMainArea = () => {
+    const { selectedTheme } = this.state;
+    const { path, content } = this.props.file;
+    const ext = fileExtension(path);
+    const lang = map.languages(ext)[0];
+    console.log(ext);
+    if (ext == 'png') {
+      return <img src={`data:image/png;base64, ${content}`}/>
+    } else {
+      return <PrismHighlight theme={selectedTheme} content={content || 'Select any file'} lang={lang}/>
+    }
+  }
 
   render() {
+    const { selectedTheme } = this.state;
     const options = [
       { value: 'dracula', label: 'Dracula' },
       { value: 'nighOwl', label: 'Night Owl' },
@@ -29,7 +43,6 @@ class Main extends Component {
       { value: 'vsDark', label: 'VS Dark' },
       { value: 'vsDarkPlus', label: 'VS Dark Plus' }
     ];
-    const { selectedTheme } = this.state;
     const { path, content } = this.props.file;
     const ext = fileExtension(path);
     const lang = map.languages(ext)[0];
@@ -47,7 +60,7 @@ class Main extends Component {
             options={options}
           />
           <TopMainHeader path={path} lang={lang}/>
-          <PrismHighlight theme={selectedTheme} content={content || 'Select any file'} lang={lang}/>
+          {this.renderMainArea()}
         </div>
       </div>
     )

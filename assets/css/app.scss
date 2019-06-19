@@ -107,6 +107,12 @@ body {
     background-color: $white;
     border-radius: 10px;
     border: 1px solid $border-color-gray;
+    .single-chat-options {
+      text-align: right;
+      a {
+        text-decoration: none;
+      }
+    }
     .top-message-container {
       border-bottom: 1px solid $border-color-gray;
       padding: 5px 0;
@@ -338,8 +344,21 @@ body {
   background-color: $background-color-white;
 }
 
+@media screen and (max-width: 1000px) {
+  #login-wrapper {
+    .wrapper {
+      width: 50%;
+    }
+  }
+}
+
 @media screen and (max-width: 800px) {
   #chat-container {
     width: 100%;
+  }
+  #login-wrapper {
+    .wrapper {
+      width: 90%;
+    }
   }
 }

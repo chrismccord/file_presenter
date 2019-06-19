@@ -9,3 +9,7 @@
 ## Usage
 
     PORT=4001 WATCH=~/my/project mix phx.server
+
+## Note
+
+It will ignore all files listed in the .gitignore directory

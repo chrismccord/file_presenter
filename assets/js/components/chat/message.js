@@ -4,7 +4,7 @@ import PrismHighlight from '../highlight';
 import isSnippet from '../../lib/message_factorial';
 
 
-const Message = ({message}) => {
+const Message = ({message, onDelete}) => {
   const { username, text } = message;
   const now = Date.now();
   const dateToFormat = '1976-04-19T12:59-0500';
@@ -15,6 +15,14 @@ const Message = ({message}) => {
   }
   return (
     <div className='message-container'>
+      <div className="single-chat-options">
+        <a href="#" className="delete-link" onClick={(event) => {
+            event.preventDefault();
+            onDelete(message)
+          }}>
+          Delete
+        </a>
+      </div>
       <div className="top-message-container">
         <span className="username">{username}</span>
         <div className="time">

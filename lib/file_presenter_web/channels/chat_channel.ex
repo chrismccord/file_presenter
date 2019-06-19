@@ -13,4 +13,10 @@ defmodule FilePresenterWeb.ChatChannel do
     {:noreply, socket}
   end
 
+  def handle_in("delete_message", id, socket) do
+    broadcast(socket, "delete_message", id)
+    ChatMonitor.delete_message(id)
+    {:noreply, socket}
+  end
+
 end
