@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Aside from './aside/aside';
+import Aside from './aside/Aside';
 
 const Sidebar = ({tree, onClickFile, onSearch}) => {
   return (

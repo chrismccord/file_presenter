@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import { SocketProvider } from 'use-phoenix-channel'
 import ChatContainer from './chat/index';
-import App from './app';
-import Login from './login';
+import App from './App';
+import Login from './Login';
 
 const Root = (props) => {
   return (

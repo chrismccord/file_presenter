@@ -18,6 +18,17 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
+.image-preview {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 100px 0px;
+  background: white;
+  border: 1px solid $background-color-gray;
+  border-radius: 3px;
+}
+
 .nice-button {
   display: block;
   padding: 5px 10px;

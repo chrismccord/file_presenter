@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import Sidebar from './sidebar'
-import Main from './main'
+import Sidebar from './Sidebar'
+import Main from './Main'
 import { useChannel } from 'use-phoenix-channel'
 import Const from '../const/channels';
 import eventReducer from '../reducers/eventReducer';
-import Chat from './chat'
+import Chat from './Chat'
 import { Redirect } from 'react-router-dom';
 
 function App() {

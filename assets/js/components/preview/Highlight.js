@@ -1,6 +1,6 @@
 import React from 'react';
 import Highlight, { defaultProps } from 'prism-react-renderer'
-import getTheme from '../lib/theme_factorial'
+import getTheme from '../../lib/theme_factorial'
 
 const PrismHighlight = ({content, lang, theme}) => {
   const themeObj = getTheme(theme.value);

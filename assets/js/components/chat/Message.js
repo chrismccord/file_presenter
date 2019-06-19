@@ -1,6 +1,6 @@
 import React from 'react';
 import Moment from 'react-moment';
-import PrismHighlight from '../highlight';
+import PrismHighlight from '../preview/Highlight';
 import isSnippet from '../../lib/message_factorial';
 
 

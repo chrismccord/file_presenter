@@ -3,7 +3,7 @@ import { useChannel } from 'use-phoenix-channel';
 import Const from '../../const/channels';
 import eventChatReducer from '../../reducers/eventChatReducer';
 import { SocketProvider } from 'use-phoenix-channel'
-import Message from './message';
+import Message from './Message';
 
 function ChatContainer() {
   const [state, broadcast] = useChannel(Const.CHATCHANNELNAME, eventChatReducer, {messages: [], message: {}})

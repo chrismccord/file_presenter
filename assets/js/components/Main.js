@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import PrismHighlight from './highlight';
-import TopMainHeader from './top_main_header';
+import PrismHighlight from './preview/Highlight';
+import ImageView from './preview/ImageView';
+import TopMainHeader from './TopMainHeader';
 import Select from 'react-select';
 
 import fileExtension from 'file-extension';
@@ -22,9 +23,8 @@ class Main extends Component {
     const { path, content } = this.props.file;
     const ext = fileExtension(path);
     const lang = map.languages(ext)[0];
-    console.log(ext);
     if (ext == 'png') {
-      return <img src={`data:image/png;base64, ${content}`}/>
+      return <ImageView content={content} />
     } else {
       return <PrismHighlight theme={selectedTheme} content={content || 'Select any file'} lang={lang}/>
     }
