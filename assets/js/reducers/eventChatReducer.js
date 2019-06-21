@@ -1,5 +1,4 @@
 const eventChatReducer = (state, {event, payload}) => {
-  console.log(event);
   switch (event) {
     case 'delete_message':
       const { id } = payload;

@@ -16,9 +16,12 @@ function ChatBox({user}) {
   const [isChatOpen, setIsChatOpen] = useState(false);
   return (
     <div id="chat" className={`is-chat-open-${isChatOpen}`}>
-      <a href='#/chat' className="chat-link">
-        <FontAwesomeIcon icon={faComments} />
-      </a>
+      <div className="chat-top-options">
+        <a href='#/chat' className="chat-option chat-link">
+          <FontAwesomeIcon icon={faComments} />
+        </a>
+        <SizeOptions className='chat-option' setSize={setSize}/>
+      </div>
       <div className="chat-square">
         <a href='#' onClick={(event) => {
             event.preventDefault();
@@ -26,7 +29,6 @@ function ChatBox({user}) {
           }} id="close-chat">
           {isChatOpen ? 'X' : '^'}
         </a>
-        <SizeOptions setSize={setSize}/>
         <UsernameInput username={username} setUsername={setUsername}/>
         <MagicTextArea setText={setText} broadcast={broadcast} size={size} text={text} username={username}/>
         <span className="chat-instructions">```code```</span>

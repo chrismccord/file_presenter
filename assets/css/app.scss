@@ -168,6 +168,22 @@ body {
   padding: 5px;
   border-radius: 5px;
   border: 1px solid $border-color-gray;
+  .chat-top-options {
+    display: flex;
+    .chat-option-button {
+      &.step-size-2 {
+        transform: rotate(90deg);
+      }
+      &:hover {
+        cursor: pointer;
+      }
+    }
+    .chat-option {
+      padding: 5px;
+      position: relative;
+      color: $strong-primary-color;
+    }
+  }
   .chat-square {
     display: flex;
     align-items: center;
@@ -181,9 +197,6 @@ body {
   &.is-chat-open-false {
     border: none;
     padding: 0;
-    .chat-link {
-      display: none;
-    }
     #close-chat {
       font-size: 30px;
       width: 30px;
@@ -191,7 +204,7 @@ body {
       top: -30px;
       line-height: 40px;
     }
-    .chat-sizes, .nice-input, button, .chat-instructions {
+    .chat-sizes, .nice-input, button, .chat-instructions, .chat-link {
       display: none;
     }
   }
