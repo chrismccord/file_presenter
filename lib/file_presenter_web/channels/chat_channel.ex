@@ -13,6 +13,12 @@ defmodule FilePresenterWeb.ChatChannel do
     {:noreply, socket}
   end
 
+  def handle_in("new_image", message, socket) do
+    broadcast(socket, "new_image", %{message: message})
+    ChatMonitor.push_message(message)
+    {:noreply, socket}
+  end
+
   def handle_in("delete_message", id, socket) do
     broadcast(socket, "delete_message", id)
     ChatMonitor.delete_message(id)

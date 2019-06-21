@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import classnames from 'classnames';
 
-const Login = () => {
-  const [username, setUsername] = useState('');
+const Login = ({ location, history }) => {
+  const [username, setUsername] = useState(localStorage.getItem('username') || '');
   const isUsernameFilled = (username) ? false : true;
   const classes = classnames('nice-button', {disabled: isUsernameFilled});
   return (
@@ -15,6 +15,7 @@ const Login = () => {
               if(isUsernameFilled) {
                 event.preventDefault();
               }
+              localStorage.setItem('username', username);
             }} to={{
               pathname: 'app',
               state: {

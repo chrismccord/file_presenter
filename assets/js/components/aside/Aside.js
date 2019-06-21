@@ -15,7 +15,7 @@ const Aside = ({tree, onClickFile, onSearch}) => {
         {tree && tree.map((file, i) => {
           return (
             <li className="file" key={file + i}>
-              <a href="#" onClick={(event) => {
+              <a href="#/" onClick={(event) => {
                 event.preventDefault();
                 onClickFile(file)
               }}>{file}</a>

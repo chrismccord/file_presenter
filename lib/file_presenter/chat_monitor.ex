@@ -2,12 +2,12 @@ defmodule FilePresenter.ChatMonitor do
   use GenServer
 
   @impl true
-  def init(messages) do
-    {:ok, messages}
+  def init([messages, users]) do
+    {:ok, [messages, users]}
   end
 
   def start_link(_fs_name, _watch_path) do
-    GenServer.start_link(__MODULE__, [], name: __MODULE__)
+    GenServer.start_link(__MODULE__, [[], []], name: __MODULE__)
   end
 
   def push_message(message) do
@@ -22,14 +22,23 @@ defmodule FilePresenter.ChatMonitor do
     GenServer.call(__MODULE__, :get_messages)
   end
 
-  def handle_call({:new_message, message}, _form, state) do
-    message_w_id = Map.put_new(message, :id, Enum.count(state) + 1)
-    new_state = Enum.concat(state, [message_w_id])
+  def get_users() do
+    GenServer.call(__MODULE__, :get_users)
+  end
+
+  def handle_call({:new_message, message}, _form, [messages, users] = state) do
+    message_w_id = Map.put_new(message, :id, Enum.count(messages) + 1)
+    new_state = [Enum.concat(messages, [message_w_id]), users]
     {:reply, message_w_id, new_state}
   end
 
   def handle_call(:get_messages, _from, state) do
-    {:reply, {:ok, state}, state}
+    [messages, users] = state
+    {:reply, {:ok, messages}, state}
+  end
+
+  def handle_call(:get_users, _from, [_messages, users] = state) do
+    {:reply, {:ok, users}, state}
   end
 
   def handle_call({:delete_message, id}, _from, state) do

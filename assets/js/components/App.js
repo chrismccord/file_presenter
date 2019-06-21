@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import Sidebar from './Sidebar'
 import Main from './Main'
 import { useChannel } from 'use-phoenix-channel'
 import Const from '../const/channels';
 import eventReducer from '../reducers/eventReducer';
-import Chat from './Chat'
+import ChatBox from './chatbox/ChatBox';
 import { Redirect } from 'react-router-dom';
 
 function App() {
@@ -25,14 +25,17 @@ function App() {
   )
 }
 
-const Root = ({ location }) => {
-  if (!location.state) return <Redirect to='/'/>
-  const { username } = location.state;
+const Root = ({ history }) => {
+  const username = localStorage.getItem('username');
+  if(!username) {
+    history.replace('/');
+    return null;
+  }
   return (
-    <div>
+    <Fragment>
       <App />
-      <Chat user={username}/>
-    </div>
+      <ChatBox user={username}/>
+    </Fragment>
   )
 }
 

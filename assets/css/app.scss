@@ -27,6 +27,9 @@ body {
   background: white;
   border: 1px solid $background-color-gray;
   border-radius: 3px;
+  img {
+    max-width: 100%;
+  }
 }
 
 .nice-button {
@@ -102,16 +105,27 @@ body {
   }
 }
 
+.chat-wrapper {
+  font-size: 0;
+}
+
+#chat-members {
+  width: 20%;
+  display: inline-block;
+  font-size: 16px;
+  vertical-align: top;
+  border: 1px solid $border-color-gray;
+  padding: 10px;
+}
+
 #chat-container {
-  width: 50%;
-  margin: 0 auto;
+  width: 80%;
+  vertical-align: top;
+  display: inline-block;
+  font-size: 16px;
   background-color: $primary-color;
   padding: 20px;
-  position: absolute;
   height: 100%;
-  width: 100%;
-  top: 0;
-  left: 0;
   .message-container {
     margin: 10px 0;
     padding: 10px;
@@ -150,13 +164,15 @@ body {
   position: fixed;
   bottom: 10px;
   right: 10px;
-  display: flex;
-  flex-direction: column;
   background: $white;
-  align-items: center;
   padding: 5px;
   border-radius: 5px;
   border: 1px solid $border-color-gray;
+  .chat-square {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
   .chat-instructions {
     font-size: 12px;
     color: $border-color-gray;
@@ -165,6 +181,9 @@ body {
   &.is-chat-open-false {
     border: none;
     padding: 0;
+    .chat-link {
+      display: none;
+    }
     #close-chat {
       font-size: 30px;
       width: 30px;
