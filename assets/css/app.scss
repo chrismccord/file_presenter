@@ -11,6 +11,8 @@ $dark-gray: $border-color-gray;
 $white: #f9f9f9;
 $primary-color: $side-bar-color;
 $strong-primary-color: #18434B;
+$current-path-color: $strong-primary-color;
+$current-path-background: #7fcae7;
 
 body {
   margin: 0;
@@ -369,6 +371,10 @@ body {
       text-align: none;
       text-decoration: none;
       transition: all 0.1s ease-in;
+      &.is-current-path-true {
+        background-color: $current-path-background;
+        color: $current-path-color;
+      }
       &:hover {
         background-color: $link-color-hover;
         color: white;

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const Aside = ({tree, onClickFile, onSearch}) => {
+const Aside = ({type, currentPath, tree, onClickFile, onSearch}) => {
   const [query, setQuery] = useState('');
   return (
     <aside className="sidebar">
@@ -13,9 +13,10 @@ const Aside = ({tree, onClickFile, onSearch}) => {
       </div>
       <ul>
         {tree && tree.map((file, i) => {
+          const isActive = currentPath == file;
           return (
             <li className="file" key={file + i}>
-              <a href="#/" onClick={(event) => {
+              <a href="#/" className={`is-current-path-${isActive}`} onClick={(event) => {
                 event.preventDefault();
                 onClickFile(file)
               }}>{file}</a>

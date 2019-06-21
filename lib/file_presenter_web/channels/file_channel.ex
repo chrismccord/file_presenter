@@ -11,7 +11,6 @@ defmodule FilePresenterWeb.FileChannel do
 
   def handle_in("get_file", %{"path" => path}, socket) do
     {:ok, content} = Watcher.get_file(path)
-
     push(socket, "get_file", %{content: content, path: path})
     {:noreply, socket}
   end

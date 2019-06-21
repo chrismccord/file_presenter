@@ -11,9 +11,12 @@ function App() {
   const [state, broadcast] = useChannel(Const.CHANNELNAME, eventReducer, {tree: [], content: {}})
   const [tree, setTree] = useState([]);
   let items = (tree.length > 0) ? tree : state.tree;
+  const { path } = state.content;
+  const { type } = state;
+  
   return (
     <div>
-      <Sidebar tree={items}
+      <Sidebar currentPath={path} type={type} tree={items}
         onClickFile={ (path) => broadcast('get_file', {path}) }
         onSearch={ (query) => {
           const regex = new RegExp(query, 'g');
