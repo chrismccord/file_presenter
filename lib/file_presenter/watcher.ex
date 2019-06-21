@@ -1,24 +1,16 @@
 defmodule FilePresenter.Watcher do
   use GenServer
 
-  @patterns [
-    ~r{priv/repo/.*(exs)$},
-    ~r{web/.*(ex)$},
-    ~r{assets/.*$},
-    ~r{web/static/.*$},
-    ~r{web/templates/.*(eex)$},
-    ~r{lib/.*(ex|exs)$},
-    ~r{mix\.exs$},
-    ~r{brunch-config.js$},
-    ~r{config/.*(exs)$}
-   ]
+   @patterns [
+     ~r{components/.*$}
+    ]
 
   def get_tree() do
-    GenServer.call(__MODULE__, :tree)
+    GenServer.call(__MODULE__, :tree, :infinity)
   end
 
   def get_file(rel_path) do
-    GenServer.call(__MODULE__, {:get_file, rel_path})
+    GenServer.call(__MODULE__, {:get_file, rel_path}, :infinity)
   end
 
   def start_link(fs_name, watch_path) do
@@ -53,8 +45,9 @@ defmodule FilePresenter.Watcher do
     {:noreply, state}
   end
 
-  def handle_info({_pid, {:fs, :file_event}, {path, _event}}, state) do
-    if matches_any_pattern?(path, @patterns) do
+  def handle_info({_pid, {:fs, :file_event}, {path, event}}, state) do
+    %{:fs_name => _, :tree => _, :watch_path => watch_path} = state
+    if matches_any_pattern?(path, @patterns, watch_path) do
       asset_type = path |> Path.extname() |> String.trim_leading(".")
       relative_path = Path.relative_to(path, state.watch_path)
       IO.inspect "Update: #{relative_path}"
@@ -76,35 +69,63 @@ defmodule FilePresenter.Watcher do
     |> Stream.filter(fn path -> not File.dir?(path) end)
     |> Enum.map(&Path.relative_to(&1, watch_path))
   end
+
   defp safe_read(path) do
+    asset_type = path |> Path.extname() |> String.trim_leading(".")
     case File.read(to_string(path)) do
-      {:ok, content} -> content
+      {:ok, content} ->
+        case MIME.type(asset_type) do
+          "image/png" -> Base.encode64(content)
+          _ -> content
+        end
       {:error, _reason} -> ""
     end
   end
 
   defp get_tree(watch_path) do
     patterns = [
-      "priv/repo/**/*",
-      "assets/js/**/*",
-      "assets/css/**/*",
-      "web/**/*",
-      "lib/**/*",
-      "config/**/*",
-      "./mix.exs",
-      "./brunch-config.exs",
-      "test/**"
+      "**/*"
     ]
+
+    gipatterns = get_gitignore_re(watch_path)
     Enum.flat_map(patterns, fn pattern ->
-      Path.wildcard(Path.expand(Path.join(watch_path, pattern)), match_dot: false)
+      wildcarded = Path.wildcard(Path.expand(Path.join(watch_path, pattern)), match_dot: false)
+      Enum.filter(wildcarded, fn path ->
+        !Enum.any?(gipatterns, fn p ->
+          String.match?(path, p)
+        end)
+      end)
     end)
   end
 
-  defp matches_any_pattern?(path, patterns) do
+  defp process_git_ignore_content(content) do
+    String.split(content, "\n")
+    |> Enum.filter(fn line ->
+      !String.match?(line, ~r/#/) && (line != "")
+    end)
+    |> Enum.map(fn item ->
+      {:ok, re} = Regex.compile(item)
+      re
+    end)
+  end
+
+  defp get_gitignore_re(watch_path) do
+    gitignore_path = to_string(watch_path) <> "/.gitignore"
+    case File.read(gitignore_path) do
+      {:ok, content} ->
+          process_git_ignore_content(content)
+      {:error, _reason} -> ""
+    end
+  end
+
+  defp matches_any_pattern?(path, patterns, watch_path) do
     path = to_string(path)
+    gipatterns = get_gitignore_re(watch_path)
 
     not(String.starts_with?(Path.basename(path), ".")) and Enum.any?(patterns, fn pattern ->
-      String.match?(path, pattern) and !String.match?(path, ~r/_build/)
+      Enum.any?(gipatterns, fn gipattern ->
+        !String.match?(path, gipattern)
+      end)
     end)
   end
 end
